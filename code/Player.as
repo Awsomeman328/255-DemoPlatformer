@@ -20,6 +20,8 @@
 		/** */
 		private const DECELERATION:Number = 800;
 		
+		//TODO: MAKE THE PLAYER JUMP HIGHER THE LONGER THE JUMP BUTTON IS PRESSED (VARIABLE JUMP HEIGHT)
+		//TODO: GIVE THEM THE ABILITY TO DOUBLE JUMP
 		
 		/**
 		 * 
@@ -44,11 +46,11 @@
 		 * This function looks at the KeyboardInput in order to accelerate the Player left, right, or up.
 		 */
 		private function handleMovement():void {
-			if(KeyboardInput.isKeydown(Keyboard.A)) velocity.x -= acceleration.x * Time.dtScaled;
-			if(KeyboardInput.isKeydown(Keyboard.D)) velocity.x += acceleration.x * Time.dtScaled;
+			if(KeyboardInput.isKeyDown(Keyboard.A)) velocity.x -= acceleration.x * Time.dtScaled;
+			if(KeyboardInput.isKeyDown(Keyboard.D)) velocity.x += acceleration.x * Time.dtScaled;
 			if(KeyboardInput.onKeyDown(Keyboard.SPACE)) velocity.y -= acceleration.y * Time.dtScaled;
 			
-			if(!KeyboardInput.keyA && !KeyboardInput.keyD){
+			if(!KeyboardInput.isKeyDown(Keyboard.A) && !KeyboardInput.isKeyDown(Keyboard.D)){
 				// left and right are not being pressed...
 				if(velocity.x < 0) {
 					// moving left
