@@ -24,6 +24,9 @@
 			//trace("gameTick");
 			Time.update();
 			player.update();
+			
+			
+			KeyboardInput.update();
 		} // ends gameLoop()
 	} // ends class Game
 } // ends package code

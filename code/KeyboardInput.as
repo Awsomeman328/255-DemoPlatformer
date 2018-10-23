@@ -8,6 +8,11 @@
 	 */
 	public class KeyboardInput {
 
+		/** */
+		public static var keysState:Array = new Array();
+		/** */
+		public static var keysPrevState:Array = new Array();
+		
 		/**This Boolean keeps track of whether or not this key is currently pressed down. Just read the name, you'll know where to find it. */
 		public static var keyBackspace: Boolean = false;
 		/**This Boolean keeps track of whether or not this key is currently pressed down. Just read the name, you'll know where to find it. */
@@ -195,11 +200,22 @@
 			stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
 		} // end constructor
 		/**
+		 * This function's job is to cache all of the key values for the NEXT frame.
+		 */
+		public static function update():void {
+			keysPrevState = keysState.slice(); // in this context, slice() gives us a copy of the array
+		}
+		/**
 		 * This function is called when we want to update a value of any of our keys.
 		 * @param keyCode The key code of whatever key needs to be changed.
 		 * @param isDown The value that we set the key value to.
 		 */
 		private static function updateKey(keyCode: int, isDown: Boolean): void {
+			
+			keysState[keyCode] = isDown;
+			
+			// The old way I did it. I didn't want to get rid of this and delete all of my work.
+			/*
 			if (keyCode == 8) keyBackspace = isDown;
 			if (keyCode == 9) keyTab = isDown;
 			if (keyCode == 13) keyEnter = isDown;
@@ -285,6 +301,7 @@
 
 			if (keyCode == 144) keyNumLock = isDown;
 			if (keyCode == 145) keyScrLK = isDown;
+			*/
 		} // end updateKey
 		/**
 		 * This event-handler is called whenever a key is released on the keyboard.
@@ -301,5 +318,23 @@
 		private static function handleKeyUp(e: KeyboardEvent): void {
 			updateKey(e.keyCode, false);
 		} // end handleKeyUp
+		/**
+		 * 
+		 */
+		public static function isKeyDown(keyCode: int):Boolean {
+			if(keyCode < 0) return false;
+			if(keyCode >= keysState.length) return false;
+			return keysState[keyCode];
+		} // ends isKeyDown()
+		/**
+		 * 
+		 */
+		public static function onKeyDown(keyCode: int):Boolean {
+			if(keyCode < 0) return false;
+			if(keyCode >= keysState.length) return false;
+			
+			return (keysState[keyCode] && !keysPrevState[keyCode]);
+			
+		} // ends isKeyDown()
 	} // end class KeybaordInput
 } // end package code

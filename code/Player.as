@@ -2,6 +2,7 @@
 	
 	import flash.display.MovieClip;
 	import flash.geom.Point;
+	import flash.ui.Keyboard;
 	
 	/**
 	 * 
@@ -9,7 +10,7 @@
 	public class Player extends MovieClip {
 		
 		/** */
-		private var acceleration:Point = new Point(800, 600);
+		private var acceleration:Point = new Point(800, 6000);
 		/** */
 		private var gravity:Point = new Point(0,200);
 		/** */
@@ -32,9 +33,20 @@
 		public function update():void {
 			//trace("playerTick");
 			
-			if(KeyboardInput.keyA) velocity.x -= acceleration.x * Time.dtScaled;
-			if(KeyboardInput.keyD) velocity.x += acceleration.x * Time.dtScaled;
-			if(KeyboardInput.keySpacebar) velocity.y -= acceleration.y * Time.dtScaled;
+			handleMovement();
+			
+			doPhysics();
+			
+			detectGround();
+			
+		} // ends update()
+		/**
+		 * This function looks at the KeyboardInput in order to accelerate the Player left, right, or up.
+		 */
+		private function handleMovement():void {
+			if(KeyboardInput.isKeydown(Keyboard.A)) velocity.x -= acceleration.x * Time.dtScaled;
+			if(KeyboardInput.isKeydown(Keyboard.D)) velocity.x += acceleration.x * Time.dtScaled;
+			if(KeyboardInput.onKeyDown(Keyboard.SPACE)) velocity.y -= acceleration.y * Time.dtScaled;
 			
 			if(!KeyboardInput.keyA && !KeyboardInput.keyD){
 				// left and right are not being pressed...
@@ -49,12 +61,7 @@
 					if (velocity.x < 0) velocity.x = 0; // clamp at 0
 				}
 			}
-			
-			doPhysics();
-			
-			detectGround();
-			
-		} // ends update()
+		} // ends handleMovement()
 		/**
 		 * 
 		 */
