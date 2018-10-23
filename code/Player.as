@@ -9,13 +9,15 @@
 	public class Player extends MovieClip {
 		
 		/** */
-		private var acceleration:Point = new Point(100, 200);
+		private var acceleration:Point = new Point(800, 600);
 		/** */
-		private var gravity:Point = new Point(0,100);
+		private var gravity:Point = new Point(0,200);
+		/** */
+		private var maxSpeed:Number = 400;
 		/** */
 		private var velocity:Point = new Point(1,5);
 		/** */
-		private const DECELERATION:Number = 100;
+		private const DECELERATION:Number = 800;
 		
 		
 		/**
@@ -61,6 +63,10 @@
 			// apply gravity to velocity
 			velocity.x += gravity.x * Time.dtScaled;
 			velocity.y += gravity.y * Time.dtScaled;
+			
+			// clamp velocity to maxSpeed
+			if(velocity.x > maxSpeed) velocity.x = maxSpeed; // clamp going right
+			if(velocity.x < -maxSpeed) velocity.x = -maxSpeed; // clamp going left
 			
 			// apply velocity to position
 			x += velocity.x * Time.dtScaled;
