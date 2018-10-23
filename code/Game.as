@@ -14,6 +14,7 @@
 		public function Game() {
 			// constructor code
 			//trace("I work");
+			KeyboardInput.setup(stage);
 			addEventListener(Event.ENTER_FRAME, gameLoop);
 		} // end constructor
 		/**

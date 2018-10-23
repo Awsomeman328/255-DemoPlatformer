@@ -9,11 +9,13 @@
 	public class Player extends MovieClip {
 		
 		/** */
-		private var acceleration:Point = new Point();
+		private var acceleration:Point = new Point(100, 200);
 		/** */
 		private var gravity:Point = new Point(0,100);
 		/** */
 		private var velocity:Point = new Point(1,5);
+		/** */
+		private const DECELERATION:Number = 100;
 		
 		
 		/**
@@ -27,6 +29,24 @@
 		 */
 		public function update():void {
 			//trace("playerTick");
+			
+			if(KeyboardInput.keyA) velocity.x -= acceleration.x * Time.dtScaled;
+			if(KeyboardInput.keyD) velocity.x += acceleration.x * Time.dtScaled;
+			if(KeyboardInput.keySpacebar) velocity.y -= acceleration.y * Time.dtScaled;
+			
+			if(!KeyboardInput.keyA && !KeyboardInput.keyD){
+				// left and right are not being pressed...
+				if(velocity.x < 0) {
+					// moving left
+					velocity.x += DECELERATION * Time.dtScaled; //add a deccelration amount to the right
+					if (velocity.x > 0) velocity.x = 0; // clamp at 0
+				}
+				if(velocity.x > 0){
+					// moving right
+					velocity.x -= DECELERATION * Time.dtScaled; //add a deccelration amount to the left
+					if (velocity.x < 0) velocity.x = 0; // clamp at 0
+				}
+			}
 			
 			doPhysics();
 			
