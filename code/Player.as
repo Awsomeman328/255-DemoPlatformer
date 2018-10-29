@@ -19,6 +19,10 @@
 		private var velocity:Point = new Point(1,5);
 		/** */
 		private const DECELERATION:Number = 800;
+		/** */
+		private var numJumps:int = 0;
+		/** */
+		private var maxJumps:int = 2;
 		
 		//DONE: MAKE THE PLAYER JUMP HIGHER THE LONGER THE JUMP BUTTON IS PRESSED (VARIABLE JUMP HEIGHT)
 		//TODO: GIVE THEM THE ABILITY TO DOUBLE JUMP
@@ -52,8 +56,11 @@
 			if(KeyboardInput.isKeyDown(Keyboard.D)) velocity.x += acceleration.x * Time.dtScaled;
 			// jump
 			if(KeyboardInput.onKeyDown(Keyboard.SPACE)) {
-				gravity.y= 100;
-				velocity.y -= acceleration.y * Time.dtScaled;
+				if(numJumps < maxJumps){
+					numJumps++;
+					gravity.y= 100;
+					velocity.y -= acceleration.y * Time.dtScaled;
+				}
 			}
 			// if space is released, or the character starts moving down, return gravity to normal
 			if(!KeyboardInput.isKeyDown(Keyboard.SPACE) || velocity.y > 0) gravity.y = 200;
@@ -99,6 +106,7 @@
 			if(y > ground) {
 				y = ground; // clamp
 				velocity.y = 0;
+				numJumps = 0;
 			}
 		} // ends detectGround()
 	} // ends class Player
