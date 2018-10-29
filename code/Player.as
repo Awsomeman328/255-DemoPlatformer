@@ -5,36 +5,36 @@
 	import flash.ui.Keyboard;
 	
 	/**
-	 * 
+	 * This is our Player Object class, the Object that the user will have direct controller over during runtime.
 	 */
 	public class Player extends MovieClip {
 		
-		/** */
+		/** How fast this Player Object will accelerate up to it's maximum speed when input is given. Also controls jump height. */
 		private var acceleration:Point = new Point(800, 6000);
-		/** */
+		/** The constant downward force applyed to this Object. If the x is given a value other than 0, then the Player will experience horizontal gravity. */
 		private var gravity:Point = new Point(0,200);
-		/** */
+		/** The fastest our character can move so that he doesn't accelerate off into infinity, getting faster and faster along the way. */
 		private var maxSpeed:Number = 400;
-		/** */
+		/** The current velocity (speed) of this object. */
 		private var velocity:Point = new Point(1,5);
-		/** */
+		/** The value at which this Object will decelrate when no input is detected. */
 		private const DECELERATION:Number = 800;
-		/** */
+		/** The current number of jumps the Player Object has performed */
 		private var numJumps:int = 0;
-		/** */
+		/** The maximum number of jumps the Player Objects can perform before needing to touch the ground again. By default, this value is set to 2. */
 		private var maxJumps:int = 2;
 		
 		//DONE: MAKE THE PLAYER JUMP HIGHER THE LONGER THE JUMP BUTTON IS PRESSED (VARIABLE JUMP HEIGHT)
-		//TODO: GIVE THEM THE ABILITY TO DOUBLE JUMP
+		//DONE: GIVE THEM THE ABILITY TO DOUBLE JUMP
 		
 		/**
-		 * 
+		 * The constructor code for this Player Object.
 		 */
 		public function Player() {
 			// constructor code
 		} // ends constructor
 		/**
-		 * 
+		 * This funciton gets called from the current Game or Scene every frame and allows this Object to function. It should only be called once per frame.
 		 */
 		public function update():void {
 			//trace("playerTick");
@@ -81,7 +81,7 @@
 			}
 		} // ends handleMovement()
 		/**
-		 * 
+		 * This function handles all of our physics for this Object. It applies gravity to velocity, clamps velocity to our maxSpeed and applies velocity to position.
 		 */
 		private function doPhysics():void {
 			// velocity += gravity * Time.deltaTime;
@@ -98,7 +98,7 @@
 			y += velocity.y * Time.dtScaled;
 		} // ends doPhysics()
 		/**
-		 * 
+		 * This function determines if this Object has touched the ground or not. If it does, it stops our vertical movement, velocity and resets our number of jumps.
 		 */
 		private function detectGround():void {
 			// look at y position
