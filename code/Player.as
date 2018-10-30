@@ -27,6 +27,9 @@
 		private var isGrounded: Boolean = false;
 		/** Whether or not the player is moving upward in a jump. This effects gravity. */
 		private var isJumping: Boolean = false;
+		
+		/** */
+		public var collider:AABB;
 
 		//DONE: MAKE THE PLAYER JUMP HIGHER THE LONGER THE JUMP BUTTON IS PRESSED (VARIABLE JUMP HEIGHT)
 		//DONE: GIVE THEM THE ABILITY TO DOUBLE JUMP
@@ -36,6 +39,7 @@
 		 */
 		public function Player() {
 			// constructor code
+			collider = new AABB(width/2, height/2)
 		} // ends constructor
 		/**
 		 * This funciton gets called from the current Game or Scene every frame and allows this Object to function. It should only be called once per frame.
@@ -48,6 +52,8 @@
 			doPhysics();
 
 			detectGround();
+			
+			collider.calcEdges(x, y);
 
 		} // ends update()
 		/**

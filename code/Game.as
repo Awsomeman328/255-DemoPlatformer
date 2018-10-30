@@ -25,8 +25,22 @@
 			Time.update();
 			player.update();
 			
+			doCollisionDetection();
 			
 			KeyboardInput.update();
 		} // ends gameLoop()
+		
+		/**
+		 * 
+		 */
+		private function doCollisionDetection():void {
+			
+			if(player.collider.checkOverlap(platform.collider)){
+				platform.alpha = .5;
+			} else {
+				platform.alpha = 1;
+			}
+			
+		} // ends doCollisionDetection()
 	} // ends class Game
 } // ends package code
