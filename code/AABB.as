@@ -2,35 +2,40 @@
 	import flash.geom.Point;
 	
 	/**
-	 * 
+	 * This is our AABB Object. We give this Object to other classes that are boxes and need to collide with other boxes.
 	 */
 	public class AABB {
 		
-		/** */
+		/** The distance between the center of the box and the left and right sides of the box. */
 		private var halfWidth:Number;
-		/** */
+		/** The distance between the center of the box and the top and bottom sides of the box. */
 		private var halfHeight:Number;
 		
-		/** */
+		/** The left edge of the box. */
 		public var xMin:Number;
-		/** */
+		/** The right edge of the box. */
 		public var xMax:Number;
-		/** */
+		/** The top edge of the box. */
 		public var yMin:Number;
-		/** */
+		/** The bottom edge of the box. */
 		public var yMax:Number;
 
 		/**
-		 * 
+		 * When we make this Object, we need to know it's halfWidth and halfHeight to know how big our box is.
+		 * @param halfWidth Half of the width of the box we want to make.
+		 * @param halfHeight Half of the height of the box we want to make.
 		 */
 		public function AABB(halfWidth:Number, halfHeight:Number) {
 			// constructor code
 			setSize(halfWidth, halfHeight);
 		} // end constructor
 		/**
-		 * 
+		 * This function saves the halfWidth and halfHeight this Object was instantiated with and keeps it for us
+		 * to use to calculate stuff later.
+		 * @param halfWidth Half of the width of the box we want to save.
+		 * @param halfHeight Half of the height of the box we want to save.
 		 */
-		public function setSize(halfWidth:Number, halfHeight:Number) {
+		public function setSize(halfWidth:Number, halfHeight:Number):void {
 			this.halfWidth = halfWidth;
 			this.halfHeight = halfHeight;
 			// recalculate edges!!!

@@ -28,7 +28,7 @@
 		/** Whether or not the player is moving upward in a jump. This effects gravity. */
 		private var isJumping: Boolean = false;
 		
-		/** */
+		/** The AABB collision for this object. */
 		public var collider:AABB;
 
 		//DONE: MAKE THE PLAYER JUMP HIGHER THE LONGER THE JUMP BUTTON IS PRESSED (VARIABLE JUMP HEIGHT)
@@ -136,7 +136,9 @@
 			}
 		} // ends detectGround()
 		/**
-		 * 
+		 * This function applies the best position to fix the position of this object when it overlappes with 
+		 * another AABB object. It also calls a recalculation of our AABB adges.
+		 * @param fix The point that represents the best place for this Object to move to.
 		 */
 		public function applyFix(fix:Point):void {
 			if(fix.x != 0){

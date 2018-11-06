@@ -5,14 +5,15 @@
 	import flash.geom.Point;
 
 	/**
-	 *
+	 * This is our Game Object. It runs everything in this application.
 	 */
 	public class Game extends MovieClip {
 
+		/** This static array keeps track of all platforms in a level. */
 		static public var platforms: Array = new Array();
 
 		/**
-		 *
+		 * This is our constructor code for our game. It holds everything we hold dear.
 		 */
 		public function Game() {
 			// constructor code
@@ -21,7 +22,8 @@
 			addEventListener(Event.ENTER_FRAME, gameLoop);
 		} // end constructor
 		/**
-		 *
+		 * This event handler is called every frame so that our game can run.
+		 * @param e The event that is passed in. It should be an ENTER_FRAME event.
 		 */
 		private function gameLoop(e: Event): void {
 			//trace("gameTick");
@@ -34,7 +36,8 @@
 		} // ends gameLoop()
 
 		/**
-		 *
+		 * This is where we do all of our AABB collision decetction. It loops through all of our walls and checks if
+		 * the player is colliding with any of them.
 		 */
 		private function doCollisionDetection(): void {
 

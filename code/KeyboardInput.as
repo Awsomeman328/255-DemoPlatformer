@@ -319,7 +319,9 @@
 			updateKey(e.keyCode, false);
 		} // end handleKeyUp
 		/**
-		 * 
+		 * This function checks if a key on the keyboard is currently pressed down.
+		 * @param keyCode The keyCode of the key we want to check.
+		 * @return Wether or not this key is currently down.
 		 */
 		public static function isKeyDown(keyCode: int):Boolean {
 			if(keyCode < 0) return false;
@@ -327,7 +329,9 @@
 			return keysState[keyCode];
 		} // ends isKeyDown()
 		/**
-		 * 
+		 * This function checks if a key on the keyboard was just pressed.
+		 * @param keyCode The keyCode of the key we want to check.
+		 * @return whether or not this key was just pressed down.
 		 */
 		public static function onKeyDown(keyCode: int):Boolean {
 			if(keyCode < 0) return false;
