@@ -46,15 +46,15 @@
 		 */
 		public function update(): void {
 			//trace("playerTick");
-
 			handleMovement();
 
 			doPhysics();
 
-			detectGround();
+			//detectGround();
 			
 			collider.calcEdges(x, y);
-
+			isGrounded = false; // this allows us to walk off of edges and no longer be "grounded."
+			// onWall = false;
 		} // ends update()
 		/**
 		 * This function looks at the KeyboardInput in order to accelerate the Player left, right, or up.
@@ -135,5 +135,24 @@
 				numJumps = 0;
 			}
 		} // ends detectGround()
+		/**
+		 * 
+		 */
+		public function applyFix(fix:Point):void {
+			if(fix.x != 0){
+				x += fix.x;
+				velocity.x = 0;
+				// onWall = true;
+			}
+			if(fix.y != 0){
+				y += fix.y;
+				velocity.y = 0;
+			}
+			if(fix.y < 0){ // we moved the player UP, so they are on top of the other box.
+				isGrounded = true;
+				numJumps = 0;
+			}
+			collider.calcEdges(x, y);
+		} // ends applyFix()
 	} // ends class Player
 } // ends package code
